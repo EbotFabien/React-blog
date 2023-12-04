@@ -10,8 +10,9 @@ export default function Posts({content='feed'}){
     const [posts,setPosts] =useState();
     const [pagination, setPagination] = useState();
     const api = useApi();
-
+    let myJSON ;
     let url;
+
     switch(content){
       case 'feed':
       case undefined:
@@ -21,7 +22,8 @@ export default function Posts({content='feed'}){
         url='/posts';
         break
       default:
-        url='/users/${content}/posts';
+        myJSON = JSON.stringify(content)
+        url='/users/'+myJSON+'/posts';
         break;
         
     }

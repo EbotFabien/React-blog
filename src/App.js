@@ -5,7 +5,7 @@ import FeedPage from "./pages/FeedPage";
 
 import ExplorePage from "./pages/ExplorePage";
 import UserPage from "./pages/UserPage";
-import LoginPages from "./pages/LoginPages";
+import LoginPage from "./pages/LoginPage";
 import ApiProvider from "./contexts/ApiProvider";
 
 
@@ -21,7 +21,7 @@ function App() {
         <Route path="/" element={<FeedPage/>} />
         <Route path="/explore" element={<ExplorePage/>}/>
         <Route path="/user/:username" element={<UserPage />} /> 
-        <Route path="/login" element={<LoginPages />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<Navigate to="/"/>} />
       </Routes>
       </ApiProvider>

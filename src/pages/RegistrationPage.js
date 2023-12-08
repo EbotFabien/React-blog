@@ -27,22 +27,24 @@ export default function RegistrationPage(){
         event.preventDefault();
         const username = usernameField.current.value;
         //const password = passwordField.current.value;
-        const errors ={};
+        //const errors ={};
         if(!username){
-            setFormErrors({username:"PLEASE PUT USERNAME"});
+            setFormErrors({username:"Please put your username"});
         }
         if (passwordField.current.value !== password2Field.current.value){
             setFormErrors({password2:"passwords don't match"});
         }
         else{
-            const data = await api.post('/users',{
-                username:usernameField.current.value,
-                email:emailField.current.value,
-                password:passwordField.current.value
-            });
+            const data = await api.post('/users', {
+                username: usernameField.current.value,
+                email: emailField.current.value,
+                password: passwordField.current.value
+              });
+            
             console.log(data);
             if (!data.ok){
-                setFormErrors(data.body.errors.json);
+                setFormErrors(data.body.message.json);
+                flash('You have succesfully registered!','success');
             }
             else{
                 setFormErrors({});

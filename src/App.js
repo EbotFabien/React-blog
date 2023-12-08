@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import ApiProvider from "./contexts/ApiProvider";
 import RegistrationPage from "./pages/RegistrationPage";
 import FlashProvider from './contexts/FlashProvider';
+import UserProvider from "./contexts/UserProvider";
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
       <BrowserRouter>
       <FlashProvider>
       <ApiProvider>
+      <UserProvider>
       <Header />
       <Routes>
         <Route path="/" element={<FeedPage/>} />
@@ -27,6 +29,7 @@ function App() {
         <Route path='/register' element={<RegistrationPage/>}/>
         <Route path="*" element={<Navigate to="/"/>} />
       </Routes>
+      </UserProvider>
       </ApiProvider>
       </FlashProvider>
       </BrowserRouter>

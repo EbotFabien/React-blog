@@ -12,14 +12,27 @@ export default class MicroblogApiClient{
         }
 
         let response;
-        try{
+        console.log();
+        response = await fetch(this.base_url + options.url +query,{
+            method: options.method,
+            headers:{
+                'Content-Type':'application/json',
+                'Accept': 'application/json',
+                //'Authorization':'Bearer '+localStorage.getItem('accessToken'),
+                ...options.headers,
+            },
+            body: options.body ? JSON.stringify(options.body):null,
+          });
+        /*try{
           response = await fetch(this.base_url + options.url +query,{
             method: options.method,
             headers:{
                 'Content-Type':'application/json',
+                'Accept': 'application/json',
+                //'Authorization':'Bearer '+localStorage.getItem('accessToken'),
                 ...options.headers,
             },
-            body: options.body ? JSON.stringify(options.body):null,
+            body: options.body ? JSON.stringify(options.body):null ,
           });
         }
         catch(error){
@@ -31,7 +44,7 @@ export default class MicroblogApiClient{
                     message:'The server is down'
                 };}
             }
-        }
+        }*/
         return{
             ok:response.ok,
             status:response.status,
@@ -40,6 +53,28 @@ export default class MicroblogApiClient{
     }
     async get (url,query,options){
         return this.request({method:'GET',url,query,...options});
+    }
+
+    async login(username,password){
+        const response = await this.post('/tokens',null,{
+            headers:{
+                Authorization: 'Basic ' + btoa(username + ":" + password)
+            }
+        });
+        if (!response.ok){
+            return response.status === 401 ? 'fail' : 'error';
+        }
+        localStorage.setItem('accessToken',response.body.access_token);
+        return 'ok';
+    }
+
+    async logout(){
+        await this.delete('/tokens');
+        localStorage.removeItem('accessToken');
+    }
+
+    isAuthenticated(){
+        return localStorage.getItem('accessToken') !== null;
     }
 
     async post(url,body,options){

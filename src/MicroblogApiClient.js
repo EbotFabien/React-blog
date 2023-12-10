@@ -12,24 +12,14 @@ export default class MicroblogApiClient{
         }
 
         let response;
-        console.log();
-        response = await fetch(this.base_url + options.url +query,{
-            method: options.method,
-            headers:{
-                'Content-Type':'application/json',
-                'Accept': 'application/json',
-                //'Authorization':'Bearer '+localStorage.getItem('accessToken'),
-                ...options.headers,
-            },
-            body: options.body ? JSON.stringify(options.body):null,
-          });
-        /*try{
+        
+        try{
           response = await fetch(this.base_url + options.url +query,{
             method: options.method,
             headers:{
                 'Content-Type':'application/json',
                 'Accept': 'application/json',
-                //'Authorization':'Bearer '+localStorage.getItem('accessToken'),
+                'Authorization':'Bearer '+localStorage.getItem('accessToken'),
                 ...options.headers,
             },
             body: options.body ? JSON.stringify(options.body):null ,
@@ -44,7 +34,7 @@ export default class MicroblogApiClient{
                     message:'The server is down'
                 };}
             }
-        }*/
+        }
         return{
             ok:response.ok,
             status:response.status,
@@ -78,7 +68,7 @@ export default class MicroblogApiClient{
     }
 
     async post(url,body,options){
-        return this.request({methos:'POST',url,body,...options})
+        return this.request({method:'POST',url,body,...options})
     }
 
     async put(url,body,options){

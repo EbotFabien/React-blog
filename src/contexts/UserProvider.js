@@ -2,7 +2,7 @@ import {createContext,useContext,useState,useEffect} from 'react';
 import { useApi } from './ApiProvider';
 
 const UserContext = createContext();
-
+//works
 export default function UserProvider({children}){
     const [user,setUser] = useState();
     const api = useApi ();

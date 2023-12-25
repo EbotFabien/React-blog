@@ -6,6 +6,10 @@ export default class MicroblogApiClient{
     }
 
     async request(options){
+        let response = await this.requestInternal(options);
+    }
+
+    async requestInternal(options){
         let query = new URLSearchParams(options.query || {}).toString();
         if (query!== ''){
             query ='?' + query;

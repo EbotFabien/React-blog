@@ -36,7 +36,7 @@ export default function LoginPage(){
         if (Object.keys(errors).length>0){
             return;
         }
-        //console.log(`You entered ${username}:${password}`)
+        console.log(`You entered ${username}:${password}`)
         const result = await login(username,password);
         if (result === 'fail'){
             flash('Invalid username or password','danger');

@@ -7,6 +7,7 @@ export default class MicroblogApiClient{
 
     async request(options){
         let response = await this.requestInternal(options);
+        return response;
     }
 
     async requestInternal(options){
@@ -26,6 +27,7 @@ export default class MicroblogApiClient{
                 'Authorization':'Bearer '+localStorage.getItem('accessToken'),
                 ...options.headers,
             },
+            credentials: options.url === '/tokens' ? 'include' : 'omit',
             body: options.body ? JSON.stringify(options.body):null ,
           });
         }
@@ -55,6 +57,7 @@ export default class MicroblogApiClient{
                 Authorization: 'Basic ' + btoa(username + ":" + password)
             }
         });
+        console.log(response.body.access_token);
         if (!response.ok){
             return response.status === 401 ? 'fail' : 'error';
         }

@@ -3,10 +3,11 @@ import Spinner from 'react-bootstrap/Spinner';
 import Post from './Pos';
 import { useApi } from '../contexts/ApiProvider';
 import More from './More';
+import Write from './Write';
 
 //const BASE_API_URL =process.env.REACT_APP_BASE_API_URL;
 
-export default function Posts({content='feed'}){
+export default function Posts({content='feed',write}){
     const [posts,setPosts] =useState();
     const [pagination, setPagination] = useState();
     const api = useApi();
@@ -42,6 +43,7 @@ export default function Posts({content='feed'}){
       })();
     },[api,url]);
 
+    
     const loadNextPage = async () =>{
       const response = await api.get(url,{
         after:posts[posts.length-1].timestamp
@@ -52,8 +54,13 @@ export default function Posts({content='feed'}){
       }
     };
 
+    const showPost = (newPost) => {
+      setPosts([newPost, ...posts]);
+    };
+
     return(
         <>
+        {write && <Write showPost={showPost}/>}
         {posts === undefined ?
             <Spinner animation ='border'/>
           :

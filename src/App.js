@@ -13,6 +13,9 @@ import UserProvider from "./contexts/UserProvider";
 
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from './components/PublicRoute';
+import EditUserPage from './pages/EditUserPage';
+
+import ChangePasswordPage from './pages/ChangePasswordPage';
 
 function App() {
   
@@ -37,6 +40,8 @@ function App() {
               <Route path="/" element={<FeedPage/>} />
               <Route path="/explore" element={<ExplorePage/>}/>
               <Route path="/user/:username" element={<UserPage />} /> 
+              <Route path="/edit" element={<EditUserPage/>} />
+              <Route path="/password" element={<ChangePasswordPage/>}/>
               <Route path="*" element={<Navigate to="/"/>} />
             </Routes>
           </PrivateRoute>

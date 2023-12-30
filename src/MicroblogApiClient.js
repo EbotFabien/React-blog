@@ -1,12 +1,19 @@
 const BASE_API_URL =process.env.REACT_APP_BASE_API_URL;
 
 export default class MicroblogApiClient{
-    constructor(){
+    constructor(onError){
+        this.onError = onError;
         this.base_url = BASE_API_URL + '/api';
     }
 
     async request(options){
         let response = await this.requestInternal(options);
+        //if (response.status === 401 && options.url !== '/tokens'){
+        //    console.log('token');
+        //}
+        if(response.status>=500 && this.onError){
+            this.onError(response);
+        }
         return response;
     }
 

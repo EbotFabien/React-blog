@@ -4,10 +4,11 @@ import Post from './Pos';
 import { useApi } from '../contexts/ApiProvider';
 import More from './More';
 import Write from './Write';
+import { memo } from 'react';
 
 //const BASE_API_URL =process.env.REACT_APP_BASE_API_URL;
 
-export default function Posts({content='feed',write}){
+export default memo(function Posts({content='feed',write}){
     const [posts,setPosts] =useState();
     const [pagination, setPagination] = useState();
     const api = useApi();
@@ -85,4 +86,4 @@ export default function Posts({content='feed',write}){
         
       );
 
-}
+});

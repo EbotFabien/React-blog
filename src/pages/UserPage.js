@@ -10,7 +10,7 @@ import Posts from '../components/Post';
 import Button from 'react-bootstrap/Button';
 import {useNavigate} from 'react-router-dom';
 import {useUser} from '../contexts/UserProvider';
-import {useFlash} from '../contextx/FlashProvider';
+import {useFlash} from '../contexts/FlashProvider';
 
 
 export default  function UserPage(){
@@ -20,6 +20,8 @@ export default  function UserPage(){
     const { username } =useParams();
     const [user, setUser] = useState();
     const api = useApi();
+    const flash = useFlash();
+    const navigate = useNavigate();
 
     useEffect(() =>{
         (async()=>{
